@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package theIronYard;
+
+/**
+ * @author admin
+ *
+ */
+public class HelloWorld {
+
+	public static void main(String[] args) {
+		//Print Hello World!
+		System.out.println("Hello World!");
+		Student s = new Student("Joe","Hill","M","Business");
+		System.out.println(s);
+	}
+
+}

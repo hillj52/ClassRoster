@@ -1,0 +1,15 @@
+package Day2;
+
+public class Day2 {
+
+	public static void main(String[] args) {
+		DiceGame dg = new DiceGame(6,2);
+		int score = 0;
+		
+		for(int i = 0;i<10;i++) {
+			score = dg.playGame();
+			System.out.println(score);
+		}
+	}
+
+}

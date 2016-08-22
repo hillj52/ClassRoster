@@ -1,0 +1,66 @@
+package cards;
+
+import java.util.Stack;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Deck {
+	
+	private Stack<Card> deck;
+	private Stack<Card> discard;
+	private int numDecks;
+	
+	public Deck() {
+		this(1);
+	}
+	
+	public Deck(int numDecks) {
+		deck = new Stack<Card>();
+		discard = new Stack<Card>();
+		this.numDecks = numDecks;
+		for (int k=0;k<numDecks;k++) {
+			for (int i=0;i<4;i++) {
+				for (int j=2;j<15;j++) {
+					deck.push(new Card(j,i));
+				}
+			}
+		}
+		shuffle();
+	}
+	
+	public Card dealOneCard() {
+		if (!deck.empty()) {
+			Card c = deck.pop();
+			discard.push(c);
+			return c;
+		}
+		return null;
+	}
+	
+	public boolean isEmpty() {
+		return deck.empty();
+	}
+	
+	public int cardsRemaining() {
+		return deck.size();
+	}
+	
+	public float percentDealt() {
+		return (float)(deck.size()/(deck.size()+discard.size()));
+	}
+	
+	public void shuffle() {
+		ArrayList<Card> al = new ArrayList<Card>();
+		Random rn = new Random();
+		while (!deck.empty()) {
+			al.add(deck.pop());
+		}
+		while (!discard.empty()) {
+			al.add(discard.pop());
+		}
+		for (int i=0;i<(52*numDecks);i++) {
+			deck.push(al.remove(rn.nextInt((52*numDecks)-i)));
+		}
+		
+	}
+}

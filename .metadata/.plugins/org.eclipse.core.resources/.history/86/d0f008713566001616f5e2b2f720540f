@@ -1,0 +1,55 @@
+package cards;
+
+import java.util.ArrayList;
+
+public class BJHand {
+
+	private ArrayList<Card> hand;
+	private int total;
+	private boolean dealerHand;
+	
+	public BJHand(boolean dealerHand) {
+		hand = new ArrayList<Card>();
+		total = 0;
+		this.dealerHand = dealerHand;
+	}
+	
+	public boolean hit(Card c) {
+		hand.add(c);
+		total += c.getValue();
+		return (total <= 31 && isSoft()) || total < 21;
+	}
+	
+	public boolean isSoft() {
+		for (int i=0;i<hand.size();i++) {
+			if (hand.get(i).getValue()==11) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public String printTotal() {
+		if (!isSoft()) {
+			return total + "":
+		} else {
+			return total + " or " total-10;
+		}
+	}
+	
+	public int getTotal() {
+		return total;
+	}
+	
+	public boolean isDealer() {
+		return dealerHand;
+	}
+	
+	public String toString() {
+		String sb = printTotal() + ": ";
+		for (int i=0;i<hand.size();i++) {
+			sb += hand.get(i) + " ";
+		}
+		return sb;
+	}
+}

@@ -1,0 +1,60 @@
+package ssa;
+
+public class Account {
+
+	private static int idGenner = 100;
+	
+	private int id;
+	private double balance;
+	private String description;
+	
+	public Account(double balance, String description) {
+		this.id = idGenner;
+		idGenner += 100;
+		this.balance = balance;
+		this.description = description;
+	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	public double getBalance() {
+		return this.balance;
+	}
+	
+	public String getBalanceString() {
+		return String.format("%.2f", balance);
+	}
+	
+	public String getDescription() {
+		return this.description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public double deposit(double amount) {
+		if (amount < 0) return balance;
+		balance += amount;
+		return balance;
+	}
+	
+	public double withdraw(double amount) {
+		if (amount < 0) return balance;
+		if (amount > balance) {
+			System.out.println("Insufficient funds! Account only has " + 
+					balance + " available for withdrawl");
+			return balance;
+		} else {
+			balance -= amount;
+			return balance;
+		}
+	}
+	
+	public String toString() {
+		return "Account Id: " + id +"\nDescription: "
+				+ description + "\nBalance: " + String.format("%.2f", balance);
+	}
+}

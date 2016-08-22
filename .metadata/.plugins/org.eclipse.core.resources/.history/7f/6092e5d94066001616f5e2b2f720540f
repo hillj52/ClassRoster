@@ -1,0 +1,19 @@
+package cards;
+
+public class Tester {
+
+	public static void main(String[] args) {
+		
+		Deck d = new Deck(8);
+		BJHand bjh = new BJHand(true);
+		
+		d.shuffle();
+		
+		bjh.hit(new Card(14,0));
+		bjh.hit(new Card(14,0));
+		System.out.println(bjh);
+		bjh.reveal();
+		System.out.println(bjh);
+	}
+
+}

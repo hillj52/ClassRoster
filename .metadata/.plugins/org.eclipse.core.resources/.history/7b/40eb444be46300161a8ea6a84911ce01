@@ -1,0 +1,13 @@
+package Day2;
+
+public class Day2 {
+
+	public static void main(String[] args) {
+		Dice d1 = new Dice(6);
+		
+		for(int i = 0;i<10;i++){
+			System.out.println(d1.roll());
+		}
+	}
+
+}

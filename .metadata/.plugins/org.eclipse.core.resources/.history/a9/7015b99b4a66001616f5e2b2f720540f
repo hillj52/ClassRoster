@@ -1,0 +1,90 @@
+package cards;
+
+import java.util.ArrayList;
+
+public class BJHand {
+
+	private ArrayList<Card> hand;
+	private int total;
+	private int numAces;
+	private boolean dealerHand;
+	
+	public BJHand(boolean dealerHand) {
+		hand = new ArrayList<Card>();
+		total = 0;
+		numAces = 0;
+		this.dealerHand = dealerHand;
+	}
+	
+	public boolean hit(Card c) {
+		hand.add(c);
+		total += c.getValue();
+		if (c.getValue()==11) {
+			numAces++;
+		}
+		return (total - (10*numAces)) < 22;
+	}
+	
+	public BJHand split(Card c) {
+		BJHand ret = new BJHand(false);
+		ret.hit(hand.remove(1));
+		this.hit(c);
+		return ret;
+	}
+	
+	public boolean splitable() {
+		return hand.size() == 2 && hand.get(0).getValue() == hand.get(1).getValue();
+	}
+	
+	public boolean canDoubleDown() {
+		return hand.size() == 2;
+	}
+	
+	public boolean isSoft() {
+		return numAces > 0;
+	}
+	
+	public boolean isBlackJack() {
+		return total==21 && hand.size() == 2;
+	}
+	
+	public String printTotal() {
+		String sb = "";
+		for (int i=numAces;i>=0;i--) {
+			if ((total-i*10) < 22 && (total-i*10) > 0) {
+				sb += total-i*10 + " or ";
+			}
+		}
+		return sb.substring(0,sb.length()-3);
+	}
+	
+	public int getTotal() {
+		if (numAces==0) {
+			return total;
+		} else {
+			String s = printTotal();
+			return Integer.parseInt(s.substring(s.length()-2));
+		}
+	}
+	
+	public boolean isDealer() {
+		return dealerHand;
+	}
+	
+	public void reveal() {
+		dealerHand = false;
+	}
+	
+	public String toString() {
+		String sb = "";
+		if (!dealerHand) {
+			sb = printTotal() + ": ";
+			for (int i=0;i<hand.size();i++) {
+				sb += hand.get(i) + " ";
+			}
+		} else {
+			sb += hand.get(0).getValue() + ": " + hand.get(0) + "*****";
+		}
+		return sb;
+	}
+}

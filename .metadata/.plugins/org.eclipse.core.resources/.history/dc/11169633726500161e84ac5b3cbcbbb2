@@ -1,0 +1,12 @@
+package ssa;
+
+public class RPNCalculator {
+	
+	public static void main(String[] args) {
+		String s = "38*6-4+2/2*3+4*";
+		char[] problem = new char[] {'2','9','*','3','/','7','+'};
+		
+		RPNStack rpn = new RPNStack(s);
+		System.out.println(rpn.solve());
+	}
+}

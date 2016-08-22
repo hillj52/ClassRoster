@@ -1,0 +1,101 @@
+/**
+ * 
+ */
+package theIronYard;
+
+/**
+ * @author admin
+ *
+ */
+public class Student {
+	
+	private Name name;
+	private boolean pass;
+	private String major;
+	private int daysMissed;
+	
+	public Student(String fName, String lName, String mInit, String major){
+		this.name = new Name(fName,lName,mInit);
+		this.major = major;
+		this.daysMissed = 0;
+		this.pass = true;
+	}
+	
+	//fullName in the form fName mInit lName
+	public Student(String fullName, String major) {
+		this.name = new Name(fullName);
+		this.major = major;
+		this.daysMissed = 0;
+		this.pass = true;
+	}
+	
+	public String getProperName() {
+		return name.toString();
+	}
+	
+	public String getFName() {
+		return this.fName;
+	}
+
+	public String getLName() {
+		return this.lName;
+	}
+	
+	public String getMInit() {
+		return this.mInit;
+	}
+	
+	public boolean getPass() {
+		return this.pass;
+	}
+	
+	public String getMajor() {
+		return major;
+	}
+	
+	public int getDaysMissed() {
+		return this.daysMissed;
+	}
+	
+	public void setPass(boolean pass) {
+		this.pass = pass;
+	}
+	
+	public void setMajor(String major) {
+		this.major = major;
+	}
+	
+	public String toString() {
+		return "Name: " + this.getProperName() + "\nMajor: " + this.major + "\n"
+				+ "Pass/Fail: " + passOrFail() + "\nDays Missed: " + this.daysMissed;
+	}
+	
+	//Adds one to the total number of days missed
+	public void missedDay() {
+		daysMissed++;
+	}
+	
+	//Adds a positive number days, to the total number of days missed
+	public void missedDay(int days) {
+		if (days >= 0) 
+				daysMissed+=days;
+	}
+	
+	public void resetDaysMissed() {
+		this.daysMissed = 0;
+	}
+	
+	public void fail() {
+		this.pass = false;
+	}
+	
+	public void pass() {
+		this.pass = true;
+	}
+	
+	private String passOrFail() {
+		if (pass) return "Pass";
+		else return "Fail";
+	}
+	
+}

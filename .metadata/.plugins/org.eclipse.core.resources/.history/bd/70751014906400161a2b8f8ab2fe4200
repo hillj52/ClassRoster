@@ -1,0 +1,25 @@
+package diceGame;
+
+public class CrapsGame {
+
+	public static void main(String[] args) {
+		CrapsRoll cr = new CrapsRoll();
+		int point = cr.getTotal();
+		if (cr.is7()) {
+			System.out.println("Frontline Winner 7!");
+		} else if (cr.isCrap()) {
+			System.out.println(cr.getTotal() + "Crap, line away!");
+		} else {
+			do {
+				System.out.println("Point of " + point + " established");
+				cr.roll();
+			} while (cr.getTotal() != 7 && cr.getTotal() != point);
+		}
+		if (cr.is7() && point != 7) {
+			System.out.println("7 Out!");
+		} else if(!cr.isCrap()){
+			System.out.println("Winner " + point);
+		}
+	}
+
+}

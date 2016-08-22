@@ -1,0 +1,11 @@
+package diceGame;
+
+public class BankrollTester {
+
+	public static void main(String[] args) {
+		DiceRoller dr = new DiceRoller(12);
+		
+		System.out.println(dr);
+	}
+
+}

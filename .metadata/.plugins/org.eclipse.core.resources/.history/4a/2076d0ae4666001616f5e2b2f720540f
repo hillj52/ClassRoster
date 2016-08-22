@@ -1,0 +1,36 @@
+package cards;
+
+import java.util.Scanner;
+
+public class BJGame {
+
+	private Deck deck;
+	private int cash;
+	private BJHand player;
+	private BJHand dealer;
+	Scanner scan;
+	
+	public BJGame(int cash) {
+		deck = new Deck(8);
+		this.cash = cash;
+		scan = new Scanner(System.in);
+	}
+	
+	public void play() {
+		dealHand();
+	}
+	
+	private void dealHand() {
+		player = new BJHand(false);
+		dealer = new BJHand(true);
+		player.hit(deck.dealOneCard());
+		dealer.hit(deck.dealOneCard());
+		player.hit(deck.dealOneCard());
+		dealer.hit(deck.dealOneCard());
+		System.out.println(this);
+	}
+	
+	public String toString() {
+		return "Player: " + player + "\nDealer: " + dealer;
+	}
+}

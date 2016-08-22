@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+package theIronYard;
+
+/**
+ * @author admin
+ *
+ */
+public class HelloWorld {
+
+	public static void main(String[] args) {
+		//Print Hello World!
+		System.out.println("Hello World!");
+		System.out.println(cubed(3));
+	}
+
+	/*
+	 * Returns the input in to the power of 3
+	 */
+	public static int cubed(int in){
+		return in^3;
+	}
+}

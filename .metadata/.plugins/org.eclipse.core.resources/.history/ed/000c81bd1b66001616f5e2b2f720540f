@@ -1,0 +1,12 @@
+package cards;
+
+public class BJPlayer {
+	
+	private int cash;
+	
+	public BJPlayer(int cash) {
+		this.cash = cash;
+	}
+	
+	public void pla
+}

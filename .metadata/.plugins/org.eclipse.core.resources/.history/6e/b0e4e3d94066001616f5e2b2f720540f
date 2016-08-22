@@ -1,0 +1,20 @@
+package cards;
+
+import java.util.Scanner;
+
+public class BJGame {
+
+	private Deck deck;
+	private int cash;
+	Scanner scan;
+	
+	public BJGame(int cash) {
+		deck = new Deck(8);
+		this.cash = cash;
+		scan = new Scanner(System.in);
+	}
+	
+	private void dealHand() {
+		
+	}
+}

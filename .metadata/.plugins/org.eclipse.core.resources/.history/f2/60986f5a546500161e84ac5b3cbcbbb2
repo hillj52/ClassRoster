@@ -1,0 +1,35 @@
+package cards;
+
+import java.util.Stack;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Deck {
+	
+	private Stack<Card> deck;
+	
+	public Deck() {
+		deck = new Stack<Card>();
+		for (int i=0;i<4;i++) {
+			for (int j=2;j<15;j++) {
+				deck.push(new Card(j,i));
+			}
+		}
+	}
+	
+	public Card dealOneCard() {
+		return deck.pop();
+	}
+	
+	public void shuffle() {
+		ArrayList<Card> al = new ArrayList<Card>();
+		Random rn = new Random();
+		while (!deck.empty()) {
+			al.add(deck.pop());
+		}
+		for (int i=0;i<52;i++) {
+			deck.push(al.remove(rn.nextInt(52-i)));
+		}
+		
+	}
+}

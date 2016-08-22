@@ -1,0 +1,11 @@
+package ssa;
+
+public class RPNCalculator {
+	
+	public static void main(String[] args) {
+		String s = "12+3*4";
+		
+		RPNStack rpn = new RPNStack(s);
+		System.out.println(rpn.solve());
+	}
+}

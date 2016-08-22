@@ -1,0 +1,10 @@
+package diceGame;
+
+public class CrapsGame {
+
+	public static void main(String[] args) {
+		Dice d = new Dice();
+		System.out.println(d.graphicDice(1));
+	}
+
+}

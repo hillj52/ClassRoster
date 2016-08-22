@@ -1,0 +1,36 @@
+package Day2;
+
+public class DiceGame {
+	private Dice dice;
+	private int numDice;
+	private int rollCount;
+	
+	public DiceGame(int numSides, int numDice) {
+		this.numDice = numDice;
+		dice = new Dice(numSides);
+		rollCount = 1;
+	}
+	
+	public int playGame() {
+		int score = 0;
+		if (numDice == 1) {
+			int roll = dice.roll();
+			while (roll != 1) {
+				System.out.println("Roll "+ rollCount + ":" + roll);
+				score += roll;
+				roll = dice.roll();
+				rollCount++;
+			}
+		} else {
+			int roll1 = dice.roll();
+			int roll2 = dice.roll();
+			while ((roll1+roll2) != 7) {
+				score = score + roll1 + roll2;
+				roll1 = dice.roll();
+				roll2 = dice.roll();
+				rollCount++;
+			}
+		}
+		return score;
+	}
+}

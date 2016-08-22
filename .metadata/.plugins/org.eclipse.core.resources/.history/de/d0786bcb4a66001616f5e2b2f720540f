@@ -1,0 +1,74 @@
+package cards;
+
+import java.util.Scanner;
+
+public class BJGame {
+
+	private Deck deck;
+	private int cash;
+	private BJHand player;
+	private BJHand dealer;
+	private Scanner scan;
+
+	public BJGame(int cash) {
+		deck = new Deck(8);
+		this.cash = cash;
+		scan = new Scanner(System.in);
+	}
+	
+	public void play() {
+		dealHand();
+		System.out.println(this);
+		playerAction();
+		System.out.println(this);
+	}
+	
+	private boolean playerAction() {
+		String inp = optionsMenu();
+		while (!inp.equalsIgnoreCase("s")) {
+			if (inp.equalsIgnoreCase("h")) {
+				if (!player.hit(deck.dealOneCard())) {
+					return false;
+				}
+			} else if (inp.equalsIgnoreCase("sp")) {
+				player.split(deck.dealOneCard());
+			} else if (inp.equalsIgnoreCase("d")) {
+				//Add logic to double down here
+			}
+		}
+		return true;
+	}
+	
+	private void dealHand() {
+		player = new BJHand(false);
+		dealer = new BJHand(true);
+		player.hit(deck.dealOneCard());
+		dealer.hit(deck.dealOneCard());
+		player.hit(deck.dealOneCard());
+		dealer.hit(deck.dealOneCard());
+	}
+	
+	private String optionsMenu() {
+		System.out.println("Choose one: ");
+		System.out.printf("(H)it (S)tay ");
+		if (player.splitable()) System.out.printf("(Sp)lit ");
+		if (player.canDoubleDown()) System.out.printf("(D)ouble ");
+		System.out.println();
+		String inp = scan.nextLine();
+		if (validInput(inp)) {
+			return inp;
+		} else {
+			return optionsMenu();
+		}
+	}
+	
+	private boolean validInput(String inp) {
+		return inp.equalsIgnoreCase("h") || inp.equalsIgnoreCase("s") 
+				|| (inp.equalsIgnoreCase("sp") && player.splitable())
+				|| (inp.equalsIgnoreCase("d") && player.canDoubleDown());
+	}
+	
+	public String toString() {
+		return "Player: " + player + "\nDealer: " + dealer;
+	}
+}

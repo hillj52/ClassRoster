@@ -1,0 +1,92 @@
+package ssa;
+
+import java.util.Stack;
+import java.util.regex.Pattern;
+
+public class RPNStack {
+
+	private Stack<String> s;
+	private int size;
+	
+	public RPNStack(String inp) {
+		s = new Stack<String>();
+		size = inp.length();
+		
+		for (int i=inp.length();i>0;i--) {
+			s.push(inp.substring(i-1, i));
+		}
+	}
+	
+	public RPNStack(char[] c) {
+		this(String.copyValueOf(c));
+	}
+
+	/*
+	 * To accommodate multiple digit numbers
+	 * The first two numbers in the input String inp
+	 * must be separated by the String in separator
+	 * For example: if separator = "$"
+	 * 123$456+89-45* would resolve to ((123+456)-89)*45
+	 */
+	public RPNStack(String inp, char separator) {
+		s = new Stack<String>();
+		size = 0;
+		inp = inp.replace(separator,'$');
+		String[] operands = inp.split("\\D");
+		String[] operators = inp.split("\\d");
+		for(int i=operands.length-1;i>0;i--) {
+			if(isOperator(operators[i])) {
+				push(operators[i]);
+			}
+			push(operands[i]);
+		}
+	}
+	
+	private boolean isOperator(String s) {
+		return s == "+" || s == "-" || s == "*" || s == "/";
+	}
+	
+	public String solve() {
+		while (size > 1) {
+			push(evaluate());
+		}
+		return  "------------------------------\n" + "RPN expression evaluates to " + pop();
+	}
+	
+	private String pop() {
+		size--;
+		return s.pop();
+	}
+	
+	private void push(String str) {
+		size++;
+		s.push(str);
+	}
+	
+	private String evaluate() {
+
+		int op1 = Integer.parseInt(pop());
+		int op2 = Integer.parseInt(pop());
+		String operator = pop();
+		int answer = 0;
+		
+		switch (operator) {
+		case "+" :
+			answer = op1 + op2;
+			break;
+		case "-" :
+			answer = op1 - op2;
+			break;
+		case "/" :
+			answer = op1 / op2;
+			break;
+		case "*" :
+			answer = op1 * op2;
+			break;
+	}
+		System.out.println("Calculating " + op1 + "," + op2 + "," + operator +
+				" Answer is " + answer);
+		
+		return answer + "";
+	}
+}

@@ -1,0 +1,12 @@
+package ssa;
+
+public class RPNCalculator {
+	
+	public static void main(String[] args) {
+		String s = "29*3/7+";
+		char[] problem = new char[] {'2','9','*','3','/','7','+'};
+		
+		RPNStack rpn = new RPNStack(problem);
+		System.out.println(rpn.solve());
+	}
+}

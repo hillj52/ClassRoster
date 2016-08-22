@@ -1,0 +1,15 @@
+package diceGame;
+
+public class BankrollTester {
+
+	public static void main(String[] args) {
+		Bankroll br = new Bankroll(1000,10);
+		
+		System.out.println(br);
+		br.placePassLineBet(50);
+		br.placeOddsBet(99, 8);
+		br.winner(5);
+		System.out.println(br);
+	}
+
+}

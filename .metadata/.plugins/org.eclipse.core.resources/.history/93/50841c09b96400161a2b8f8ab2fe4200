@@ -1,0 +1,72 @@
+package diceGame;
+
+import java.util.Scanner;
+
+public class CrapsGame {
+
+	public static void main(String[] args) {
+		CrapsRoll cr = new CrapsRoll();
+		Bankroll br = new Bankroll(1000,10);
+		int point = 0;
+		String userInput = "";
+		Scanner scan = new Scanner(System.in);
+		boolean frontlineWinner = false;
+		
+		do {
+			//Reads pass line bet from the keyboard
+			System.out.println("Enter Amount to bet on the Pass Line: ");
+			while (!br.placePassLineBet(Integer.parseInt(scan.nextLine()))) {
+				System.out.println("Try again:");
+			}
+			cr.roll();
+			frontlineWinner = false;
+			if (cr.is7()) {
+				//Roll is a frontline winner 7!
+				System.out.println("Frontline Winner 7!");
+				br.winner(7);
+				frontlineWinner = true;
+			} else if (cr.isCrap()) {
+				//Roll is a crap out
+				System.out.println(cr.getTotal() + "Crap, line away!");
+				br.out();
+			} else {
+				//New point has been established
+				point = cr.getTotal();
+				System.out.println("Point of " + point + " established");
+				System.out.println("Enter Amount to bet on the Odds: ");
+				//Read odds beat in from the keyboard
+				while (!br.placeOddsBet(Integer.parseInt(scan.nextLine()),point)) {
+					System.out.println("Try again:");
+				}
+				do {
+					//Roll until a 7 or the point is made
+					cr.roll();
+				} while (cr.getTotal() != 7 && cr.getTotal() != point);
+			}
+			if (cr.is7() && !frontlineWinner) {
+				//Roll ended on 7 out	
+				System.out.println("7 Out!");
+				br.out();
+			} else if(!cr.isCrap()){
+				//checks to ensure roll was a winner
+				System.out.println("Winner " + point + "!");
+				br.winner(point);
+			}
+	
+			System.out.println(br);
+			if (br.getCash() == 0) {
+				//User cannot continue with no cash to bet
+				System.out.println("You have no cash left! You must leave the table");
+				userInput = "n";
+			} else {
+				//Prompt user to continue
+				System.out.println("Continue y/n: ");
+				userInput = scan.nextLine();
+				userInput = userInput.trim();
+			}
+		} while (!userInput.equalsIgnoreCase("n"));
+		
+	scan.close();
+	}
+
+}

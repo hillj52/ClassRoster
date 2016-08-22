@@ -1,0 +1,15 @@
+package diceGame;
+
+public class CrapsGame {
+
+	public static void main(String[] args) {
+		CrapsRoll cr = new CrapsRoll();
+		int point = cr.getTotal();
+		if (cr.getTotal() == 7) {
+			System.out.println("Frontline Winner 7!");
+		} else {
+			
+		}
+	}
+
+}

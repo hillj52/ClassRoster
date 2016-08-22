@@ -1,0 +1,69 @@
+/**
+ * 
+ */
+package theIronYard;
+
+/**
+ * @author admin
+ *
+ */
+public class Student {
+	
+	private String fName;
+	private String lName;
+	private String mInit;
+	private boolean pass;
+	private String major;
+	private int daysMissed;
+	
+	public Student(String fName, String lName, String mInit, String major){
+		this.fName = fName;
+		this.lName = lName;
+		this.mInit = mInit;
+		this.major = major;
+		this.daysMissed = 0;
+		this.pass = true;
+	}
+	
+	public String getName() {
+		return this.lName + ", " + this.fName + " " + this.mInit + ".";
+	}
+	
+	public boolean getPass() {
+		return this.pass;
+	}
+	
+	public String getMajor() {
+		return major;
+	}
+	
+	public void setPass(boolean pass) {
+		this.pass = pass;
+	}
+	
+	public void setMajor(String major) {
+		this.major = major;
+	}
+	
+	public String toString() {
+		return "Name: " + this.getName() + "/nPass:" + passOrFail();
+	}
+	
+	public void missedDay() {
+		daysMissed++;
+	}
+	
+	public void fail() {
+		this.pass = false;
+	}
+	
+	public void pass() {
+		this.pass = true;
+	}
+	
+	private String passOrFail() {
+		if (pass) return "Pass";
+		else return "Fail";
+	}
+	
+}

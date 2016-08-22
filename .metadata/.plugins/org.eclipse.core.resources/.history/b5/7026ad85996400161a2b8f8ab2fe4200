@@ -1,0 +1,41 @@
+package diceGame;
+
+import java.util.Scanner;
+
+public class CrapsGame {
+
+	public static void main(String[] args) {
+		CrapsRoll cr = new CrapsRoll();
+		int point = 0;
+		String userInput = "";
+		Scanner scan = new Scanner(System.in);
+		boolean frontlineWinner = false;
+		
+		do {
+			cr.roll();
+			frontlineWinner = false;
+			if (cr.is7()) {
+				System.out.println("Frontline Winner 7!");
+				frontlineWinner = true;
+			} else if (cr.isCrap()) {
+				System.out.println(cr.getTotal() + "Crap, line away!");
+			} else {
+				point = cr.getTotal();
+				System.out.println("Point of " + point + " established");
+				do {
+					cr.roll();
+				} while (cr.getTotal() != 7 && cr.getTotal() != point);
+			}
+			if (cr.is7() && !frontlineWinner) {
+				System.out.println("7 Out!");
+			} else if(!cr.isCrap()){
+				System.out.println("Winner " + point + "!");
+			}
+	
+			System.out.println("Continue y/n: ");
+			userInput = scan.nextLine();
+			userInput = userInput.trim();
+		} while (!userInput.equalsIgnoreCase("n"));
+	}
+
+}

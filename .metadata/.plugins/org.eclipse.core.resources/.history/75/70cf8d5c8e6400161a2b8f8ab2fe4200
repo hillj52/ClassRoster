@@ -1,0 +1,10 @@
+package diceGame;
+
+public class CrapsGame {
+
+	public static void main(String[] args) {
+		CrapsRoll cr = new CrapsRoll();
+		System.out.println(cr);
+	}
+
+}

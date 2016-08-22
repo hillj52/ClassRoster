@@ -1,0 +1,17 @@
+package cards;
+
+public class Tester {
+
+	public static void main(String[] args) {
+		
+		Deck d = new Deck(8);
+		
+		d.shuffle();
+		
+		while (!d.isEmpty()) {
+			System.out.println(d.dealOneCard());
+			System.out.println(d.percentDealt());
+		}
+	}
+
+}
